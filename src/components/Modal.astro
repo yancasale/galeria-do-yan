@@ -1,0 +1,121 @@
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <button class="modal-close" aria-label="Close modal">×</button>
+
+    <img id="modal-image" />
+
+    <div class="modal-meta">
+      <h2 id="modal-title"></h2>
+      <p id="modal-info"></p>
+      <p id="modal-description"></p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1.5rem;
+  }
+
+  .modal-content {
+    position: relative;
+    max-width: 900px;
+    width: 100%;
+    max-height: 90vh;
+    background: #fff;
+    padding: 1.5rem;
+    overflow-y: auto;
+  }
+
+  .modal img {
+    width: 100%;
+    max-height: 60vh;
+    object-fit: contain;
+    margin-bottom: 1rem;
+  }
+
+  .modal-meta {
+    text-align: center;
+  }
+
+  .modal-meta h2 {
+    margin: 0.5rem 0;
+  }
+
+  .modal-meta p {
+    color: #666;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 600px) {
+    .modal-content {
+      padding: 1rem;
+    }
+
+    .modal-meta h2 {
+      font-size: 1.2rem;
+    }
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    line-height: 1;
+    cursor: pointer;
+    color: #666;
+  }
+
+  .modal-close:hover {
+    color: #000;
+  }
+</style>
+
+<script>
+  const modal = document.getElementById("modal");
+  const modalImage = document.getElementById("modal-image");
+  const modalTitle = document.getElementById("modal-title");
+  const modalInfo = document.getElementById("modal-info");
+  const modalDescription = document.getElementById("modal-description");
+  const closeButton = document.querySelector(".modal-close");
+
+  function closeModal() {
+    modal.style.display = "none";
+    modalImage.src = "";
+  }
+
+  window.openModal = (el) => {
+    modalImage.src = el.src;
+    modalTitle.textContent = el.dataset.title;
+    modalInfo.textContent = `${el.dataset.type} · ${el.dataset.date}`;
+    modalDescription.textContent = el.dataset.description || "";
+    modal.style.display = "flex";
+  };
+
+  // Click X
+  closeButton.addEventListener("click", closeModal);
+
+  // Click outside content
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+
+  // ESC key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.style.display === "flex") {
+      closeModal();
+    }
+  });
+</script>

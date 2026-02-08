@@ -1,0 +1,117 @@
+---
+import Modal from "./Modal.astro";
+import FilterPopover from "./FilterPopover.astro";
+
+const { works } = Astro.props;
+---
+
+<section class="grid">
+  {
+    works.map((work) => (
+      <article class="item" data-type={work.data.type} data-item>
+        <img
+          src={work.data.cover}
+          alt={work.data.title}
+          data-title={work.data.title}
+          data-type={work.data.type}
+          data-date={work.data.date.toDateString()}
+          data-description={work.body}
+          onClick="openModal(this)"
+        />
+        <p class="title">{work.data.title}</p>
+        <p class="meta">{work.data.type}</p>
+      </article>
+    ))
+  }
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 2.5rem;
+  }
+
+  .title {
+    text-align: center;
+    margin-top: 0.75rem;
+    color: #444;
+  }
+
+  .meta {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #999;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .item {
+    padding: 1rem;
+    transition: background 0.3s ease;
+    cursor: pointer;
+  }
+
+  .item img {
+    transition: transform 0.4s ease;
+  }
+
+  .item:hover img {
+    transform: scale(1.03);
+  }
+
+  @media (hover: hover) {
+    .item:hover img {
+      transform: scale(1.05);
+    }
+  }
+
+  .item:hover {
+    background: #f2f2f2;
+  }
+
+  p {
+    text-align: center;
+    color: #888;
+    margin-top: 0.75rem;
+  }
+</style>
+
+<script>
+  const buttons = document.querySelectorAll("[data-filter]");
+
+  const items = Array.from(document.querySelectorAll("[data-item]"));
+  let visibleCount = 6;
+
+  function updateVisibility() {
+    items.forEach((item, index) => {
+      item.style.display = index < visibleCount ? "block" : "none";
+    });
+  }
+
+  updateVisibility();
+
+  window.addEventListener("scroll", () => {
+    if (
+      window.innerHeight + window.scrollY >=
+      document.body.offsetHeight - 300
+    ) {
+      visibleCount += 6;
+      updateVisibility();
+    }
+  });
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      buttons.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      const filter = btn.dataset.filter;
+
+      items.forEach((item) => {
+        item.style.display =
+          filter === "all" || item.dataset.type === filter ? "block" : "none";
+      });
+    });
+  });
+</script>

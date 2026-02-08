@@ -1,0 +1,130 @@
+---
+const path = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="/src/styles/global.css" />
+    <style>
+      header {
+        text-align: center;
+        padding: 3rem 1rem;
+      }
+
+      .nav-row {
+        display: inline-flex;
+        align-items: center;
+        gap: 1.25rem;
+      }
+
+      nav {
+        display: inline-flex;
+        gap: 1.25rem;
+      }
+
+      nav a {
+        color: #aaa;
+        transition: color 0.3s;
+      }
+
+      .site-title {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      .site-title img {
+        max-width: 420px;
+        width: 100%;
+        height: auto;
+        margin: 0 auto;
+        display: block;
+      }
+
+      nav a.active {
+        color: #000;
+      }
+
+      .nav-controls {
+        display: inline-flex;
+        align-items: center;
+      }
+
+      header {
+        text-align: center;
+        padding: 3rem 1rem;
+      }
+
+      nav a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 100%;
+        height: 1px;
+        background: #000;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.25s ease;
+      }
+
+      nav a:hover {
+        color: #000;
+      }
+
+      .nav-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.25rem;
+      }
+
+      nav {
+        display: flex;
+        gap: 1.25rem;
+      }
+
+      nav a {
+        margin: 0 1rem;
+        color: #aaa;
+        transition: color 0.3s;
+      }
+
+      nav a.active {
+        color: #000;
+      }
+
+      main {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 1.5rem 4rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="site-title">
+        <img src="/images/ui/title.png" alt="Your name" />
+      </div>
+
+      <div class="nav-row">
+        <nav>
+          <a href="/" class={path === "/" ? "active" : ""}>Portfolio</a>
+          <a href="/about" class={path === "/about" ? "active" : ""}>About</a>
+        </nav>
+
+        <div class="nav-controls">
+          <slot name="controls" />
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>

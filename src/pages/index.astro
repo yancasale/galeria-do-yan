@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Gallery from "../components/Gallery.astro";
+import FilterPopover from "../components/FilterPopover.astro";
+import Modal from "../components/Modal.astro";
+import { getCollection } from "astro:content";
+
+const works = (await getCollection("works")).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+---
+
+<BaseLayout>
+  <!-- This goes into the header -->
+  <FilterPopover slot="controls" />
+
+  <!-- Main content -->
+  <Gallery works={works} />
+
+  <!-- Modal LAST -->
+  <Modal />
+</BaseLayout>
