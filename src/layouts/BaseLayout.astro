@@ -7,7 +7,7 @@ const path = Astro.url.pathname;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Portfolio</title>
+    <title>Galeria do Yan</title>
     <link rel="stylesheet" href="/src/styles/global.css" />
     <style>
       header {
@@ -108,13 +108,13 @@ const path = Astro.url.pathname;
   <body>
     <header>
       <div class="site-title">
-        <img src="/images/ui/title.png" alt="Your name" />
+        <img src="/images/ui/title.png" alt="Galeria do Yan" />
       </div>
 
       <div class="nav-row">
         <nav>
-          <a href="/" class={path === "/" ? "active" : ""}>Portfolio</a>
-          <a href="/about" class={path === "/about" ? "active" : ""}>About</a>
+          <a href="/" class={path === "/" ? "active" : ""}>Galeria</a>
+          <a href="/about" class={path === "/about" ? "active" : ""}>Sobre</a>
         </nav>
 
         <div class="nav-controls">

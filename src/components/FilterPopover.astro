@@ -1,10 +1,10 @@
 <div class="filter-wrapper">
-  <button id="filter-toggle" aria-label="Filter works"> ☰ </button>
+  <button id="filter-toggle" aria-label="Filter works">☰</button>
 
   <div id="filter-panel" class="panel">
-    <button data-filter="all" class="active">All</button>
-    <button data-filter="photo">Photography</button>
-    <button data-filter="drawing">Drawing</button>
+    <button data-filter="all" class="active">Todos</button>
+    <button data-filter="photo">Fotos</button>
+    <button data-filter="drawing">Desenhos</button>
   </div>
 </div>
 
@@ -20,6 +20,14 @@
     font-size: 1.2rem;
     cursor: pointer;
     color: #999;
+  }
+
+  #filter-toggle:hover {
+    color: #000;
+  }
+
+  #filter-toggle {
+    transition: color 0.3s;
   }
 
   .panel {
@@ -43,6 +51,7 @@
     width: 100%;
     cursor: pointer;
     color: #777;
+    font-family: "Courier New", Courier, monospace;
   }
 
   .panel button.active {

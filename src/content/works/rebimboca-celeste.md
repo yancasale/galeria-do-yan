@@ -1,9 +1,9 @@
 ---
-title: Rebimboca Celeste
+title: Rebimboca celeste
 date: 2026-02-08
 type: drawing
 cover: /images/works/rebimboca-celeste/cover.jpg
 ---
 
 
-Toy design and fun illustration made in 3D.
+Um desenho doidinho

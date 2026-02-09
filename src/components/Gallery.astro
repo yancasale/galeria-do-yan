@@ -9,15 +9,17 @@ const { works } = Astro.props;
   {
     works.map((work) => (
       <article class="item" data-type={work.data.type} data-item>
-        <img
-          src={work.data.cover}
-          alt={work.data.title}
-          data-title={work.data.title}
-          data-type={work.data.type}
-          data-date={work.data.date.toDateString()}
-          data-description={work.body}
-          onClick="openModal(this)"
-        />
+        <div class="image-box">
+          <img
+            src={work.data.cover}
+            alt={work.data.title}
+            data-title={work.data.title}
+            data-type={work.data.type}
+            data-date={work.data.date.toDateString()}
+            data-description={work.body}
+            onClick="openModal(this)"
+          />
+        </div>
         <p class="title">{work.data.title}</p>
         <p class="meta">{work.data.type}</p>
       </article>
@@ -30,6 +32,23 @@ const { works } = Astro.props;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 2.5rem;
+  }
+
+  .image-box {
+    width: 100%;
+  }
+
+  .image-box {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+  }
+
+  .image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
   .title {
@@ -62,7 +81,7 @@ const { works } = Astro.props;
 
   @media (hover: hover) {
     .item:hover img {
-      transform: scale(1.05);
+      transform: scale(1.03);
     }
   }
 
