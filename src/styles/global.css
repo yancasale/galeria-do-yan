@@ -4,10 +4,20 @@
 
 body {
   margin: 0;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 
+    "Courier New",
+    Courier,
+    "Liberation Mono",
+    monospace;
   background: #fff;
   color: #2b2b2b;
+  letter-spacing: 0.02em;
 }
+
+h1, h2, h3 {
+  letter-spacing: 0.04em;
+}
+
 
 img {
   width: 100%;
