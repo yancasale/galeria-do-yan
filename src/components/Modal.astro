@@ -92,6 +92,9 @@
   function closeModal() {
     modal.style.display = "none";
     modalImage.src = "";
+    modal.classList.remove("active");
+    modalImage.src = "";
+    document.body.style.overflow = "";
   }
 
   window.openModal = (el) => {
@@ -100,6 +103,8 @@
     modalInfo.textContent = `${el.dataset.type} · ${el.dataset.date}`;
     modalDescription.textContent = el.dataset.description || "";
     modal.style.display = "flex";
+    modal.classList.add("active");
+    document.body.style.overflow = "hidden";
   };
 
   // Click X

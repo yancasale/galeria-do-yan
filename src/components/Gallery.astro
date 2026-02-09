@@ -97,14 +97,26 @@ const { works } = Astro.props;
 </style>
 
 <script>
+  let activeFilter = "all";
+
   const buttons = document.querySelectorAll("[data-filter]");
 
   const items = Array.from(document.querySelectorAll("[data-item]"));
   let visibleCount = 6;
 
   function updateVisibility() {
-    items.forEach((item, index) => {
-      item.style.display = index < visibleCount ? "block" : "none";
+    let visibleIndex = 0;
+
+    items.forEach((item) => {
+      const matchesFilter =
+        activeFilter === "all" || item.dataset.type === activeFilter;
+
+      if (matchesFilter && visibleIndex < visibleCount) {
+        item.style.display = "block";
+        visibleIndex++;
+      } else {
+        item.style.display = "none";
+      }
     });
   }
 
@@ -125,12 +137,8 @@ const { works } = Astro.props;
       buttons.forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");
 
-      const filter = btn.dataset.filter;
-
-      items.forEach((item) => {
-        item.style.display =
-          filter === "all" || item.dataset.type === filter ? "block" : "none";
-      });
+      activeFilter = btn.dataset.filter;
+      updateVisibility();
     });
   });
 </script>
