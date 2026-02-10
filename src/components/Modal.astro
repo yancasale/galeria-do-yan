@@ -97,11 +97,23 @@
     document.body.style.overflow = "";
   }
 
-  window.openModal = (el) => {
-    modalImage.src = el.src;
+  window.openModal = (el, event) => {
+    // If click came from filter UI, do nothing
+    if (event && event.target.closest(".filter-wrapper")) {
+      return;
+    }
+
+    // If card is hidden (filtered out), do nothing
+    if (el.style.display === "none") return;
+
+    const img = el.querySelector("img");
+    if (!img) return;
+
+    modalImage.src = img.src;
     modalTitle.textContent = el.dataset.title;
     modalInfo.textContent = `${el.dataset.type} · ${el.dataset.date}`;
     modalDescription.textContent = el.dataset.description || "";
+
     modal.style.display = "flex";
     modal.classList.add("active");
     document.body.style.overflow = "hidden";

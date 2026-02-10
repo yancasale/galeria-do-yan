@@ -122,8 +122,8 @@ const path = Astro.url.pathname.replace(/\/$/, "");
 
       <div class="nav-row">
         <nav>
-          <a href="/" class={path === "/" ? "active" : ""}>Galeria</a>
-          <a href="/about" class={path === "/about" ? "active" : ""}>Sobre</a>
+          <a href="/" class={path === "" ? "active" : ""}> Galeria </a>
+          <a href="/about" class={path === "/about" ? "active" : ""}> Sobre </a>
         </nav>
 
         <div class="nav-controls">

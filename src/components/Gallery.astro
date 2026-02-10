@@ -8,18 +8,18 @@ const { works } = Astro.props;
 <section class="grid">
   {
     works.map((work) => (
-      <article class="item" data-type={work.data.type} data-item>
+      <article
+        class="item"
+        data-type={work.data.type}
+        data-title={work.data.title}
+        data-date={work.data.date.toDateString()}
+        data-description={work.body}
+        onClick="openModal(this, event)"
+      >
         <div class="image-box">
-          <img
-            src={work.data.cover}
-            alt={work.data.title}
-            data-title={work.data.title}
-            data-type={work.data.type}
-            data-date={work.data.date.toDateString()}
-            data-description={work.body}
-            onClick="openModal(this)"
-          />
+          <img src={work.data.cover} alt={work.data.title} />
         </div>
+
         <p class="title">{work.data.title}</p>
         <p class="meta">{work.data.type}</p>
       </article>
@@ -97,31 +97,41 @@ const { works } = Astro.props;
 </style>
 
 <script>
+  const items = Array.from(document.querySelectorAll(".item"));
+  const filterButtons = document.querySelectorAll("[data-filter]");
+
   let activeFilter = "all";
-
-  const buttons = document.querySelectorAll("[data-filter]");
-
-  const items = Array.from(document.querySelectorAll("[data-item]"));
-  let visibleCount = 6;
+  let visibleCount = 12;
 
   function updateVisibility() {
-    let visibleIndex = 0;
+    let shown = 0;
 
     items.forEach((item) => {
       const matchesFilter =
         activeFilter === "all" || item.dataset.type === activeFilter;
 
-      if (matchesFilter && visibleIndex < visibleCount) {
+      if (matchesFilter && shown < visibleCount) {
         item.style.display = "block";
-        visibleIndex++;
+        shown++;
       } else {
         item.style.display = "none";
       }
     });
   }
 
-  updateVisibility();
+  // Filter button clicks
+  filterButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      filterButtons.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
 
+      activeFilter = btn.dataset.filter;
+      visibleCount = 12; // reset scroll on filter change
+      updateVisibility();
+    });
+  });
+
+  // Infinite scroll
   window.addEventListener("scroll", () => {
     if (
       window.innerHeight + window.scrollY >=
@@ -132,13 +142,6 @@ const { works } = Astro.props;
     }
   });
 
-  buttons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      buttons.forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
-
-      activeFilter = btn.dataset.filter;
-      updateVisibility();
-    });
-  });
+  // Initial render
+  updateVisibility();
 </script>
