@@ -2,13 +2,21 @@
   box-sizing: border-box;
 }
 
-body {
+html, body {
   margin: 0;
   font-family: "IBM Plex Mono", monospace;
   background: #f9f7f7ac;
   color: #2b2b2b;
 }
 
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+
+:root {
+  color-scheme: light;
+}
 
 
 img {
