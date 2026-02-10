@@ -4,12 +4,7 @@
 
 body {
   margin: 0;
-  font-family: 
-    "Space Mono",
-    "Courier New",
-    Courier,
-    "Liberation Mono",
-    monospace;
+  font-family: "IBM Plex Mono", monospace;
   background: #fff;
   color: #2b2b2b;
 }
