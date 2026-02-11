@@ -1,6 +1,6 @@
 ---
 title: Melhor amigo
-date: 2025-08-09
+date: 2023-09-12
 type: photo
 cover: /images/works/melhor-amigo/cover.jpg
 ---
