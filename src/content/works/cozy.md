@@ -1,0 +1,6 @@
+---
+title: Cozy
+date: 2025-05-12
+type: drawing
+cover: /images/works/cozy/cover.jpeg
+---
