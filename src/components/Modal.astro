@@ -5,7 +5,6 @@
     <img id="modal-image" />
 
     <div class="modal-meta">
-      <h2 id="modal-title"></h2>
       <p id="modal-info"></p>
       <p id="modal-description"></p>
     </div>
@@ -110,7 +109,7 @@
     if (!img) return;
 
     modalImage.src = img.src;
-    modalTitle.textContent = el.dataset.title;
+
     modalInfo.textContent = `${el.dataset.type} · ${el.dataset.date}`;
     modalDescription.textContent = el.dataset.description || "";
 
