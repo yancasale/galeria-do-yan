@@ -1,10 +1,9 @@
 backend:
-  name: github
-  repo: yancasale/galeria-do-yan
+  name: git-gateway
   branch: main
 
-media_folder: "public/uploads"
-public_folder: "/uploads"
+media_folder: "public/images"
+public_folder: "/images"
 
 collections:
   - name: "works"
@@ -14,7 +13,8 @@ collections:
     slug: "{{slug}}"
     fields:
       - { label: "Título", name: "title", widget: "string" }
-      - { label: "Tipo", name: "type", widget: "select", options: ["foto", "desenho"] }
       - { label: "Data", name: "date", widget: "datetime" }
-      - { label: "Imagem", name: "image", widget: "image" }
-      - { label: "Descrição", name: "description", widget: "text", required: false }
+      - { label: "Tipo", name: "type", widget: "select", options: ["photo", "drawing"] }
+      - { label: "Imagem", name: "cover", widget: "image" }
+      - { label: "Descrição", name: "description", widget: "text" }
+
