@@ -14,7 +14,7 @@ collections:
     fields:
       - { label: "Título", name: "title", widget: "string" }
       - { label: "Data", name: "date", widget: "datetime" }
-      - { label: "Tipo", name: "type", widget: "select", options: ["foto", "desenho"] }
+      - { label: "Tipo", name: "type", widget: "select", options: ["photo", "drawing"] }
       - { label: "Imagem", name: "cover", widget: "image" }
       - { label: "Descrição", name: "description", widget: "text", required: false }
 
