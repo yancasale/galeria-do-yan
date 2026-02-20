@@ -12,8 +12,8 @@ collections:
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Título", name: "title", widget: "string", required: false }
-      - { label: "Data", name: "date", widget: "datetime", required: false }
+      - { label: "Título", name: "title", widget: "string"}
+      - { label: "Data", name: "date", widget: "datetime"}
       - { label: "Tipo", name: "type", widget: "select", options: ["drawing", "photo"] }
       - { label: "Imagem", name: "cover", widget: "image" }
       - { label: "Descrição", name: "description", widget: "text", required: false }
