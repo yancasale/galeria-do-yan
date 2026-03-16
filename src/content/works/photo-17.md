@@ -1,6 +1,6 @@
 ---
-title: Photo
-date: 2026-03-15T13:31:00.000Z
+title: photo
+date: 2023-02-16T13:33:00.000Z
 type: photo
-cover: /images/works/dsc02954.jpg
+cover: /images/works/dsc01529.jpg
 ---
