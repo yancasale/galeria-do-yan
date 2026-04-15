@@ -16,9 +16,7 @@ const { works } = Astro.props;
         data-description={work.body}
         onClick="openModal(this, event)"
       >
-        <div class="image-box">
-          <img src={work.data.cover} alt={work.data.title} />
-        </div>
+        <img src={work.data.cover} alt={work.data.title} />
       </article>
     ))
   }
@@ -26,26 +24,19 @@ const { works } = Astro.props;
 
 <style>
   .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 2.5rem;
+    column-count: 4;
+    column-gap: 1.2rem;
   }
 
-  .image-box {
+  .item {
+    break-inside: avoid;
+    margin-bottom: 1rem;
+    display: inline-block;
     width: 100%;
   }
 
   .image-box {
     width: 100%;
-    aspect-ratio: 3 / 4;
-    overflow: hidden;
-  }
-
-  .image-box img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
   }
 
   .title {
@@ -63,9 +54,15 @@ const { works } = Astro.props;
   }
 
   .item {
-    padding: 1rem;
+    padding: 1%;
     transition: background 0.3s ease;
     cursor: pointer;
+  }
+
+  .item img {
+    width: 100%;
+    height: auto;
+    display: block;
   }
 
   .item img {
@@ -79,6 +76,18 @@ const { works } = Astro.props;
   @media (hover: hover) {
     .item:hover img {
       transform: scale(1.03);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .grid {
+      column-count: 2;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .grid {
+      column-count: 1;
     }
   }
 
