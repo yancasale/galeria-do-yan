@@ -24,15 +24,22 @@ const { works } = Astro.props;
 
 <style>
   .grid {
-    column-count: 4;
-    column-gap: 1.2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-auto-rows: 10px; /* base do cálculo */
+    gap: 1rem;
   }
 
   .item {
-    break-inside: avoid;
-    margin-bottom: 1rem;
-    display: inline-block;
     width: 100%;
+    cursor: pointer;
+  }
+
+  .item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 4px;
   }
 
   .image-box {
@@ -54,15 +61,7 @@ const { works } = Astro.props;
   }
 
   .item {
-    padding: 1%;
     transition: background 0.3s ease;
-    cursor: pointer;
-  }
-
-  .item img {
-    width: 100%;
-    height: auto;
-    display: block;
   }
 
   .item img {
@@ -77,22 +76,6 @@ const { works } = Astro.props;
     .item:hover img {
       transform: scale(1.03);
     }
-  }
-
-  @media (max-width: 900px) {
-    .grid {
-      column-count: 2;
-    }
-  }
-
-  @media (max-width: 500px) {
-    .grid {
-      column-count: 1;
-    }
-  }
-
-  .item:hover {
-    background: #f2f2f2;
   }
 
   p {
@@ -145,9 +128,43 @@ const { works } = Astro.props;
     ) {
       visibleCount += 6;
       updateVisibility();
+      resizeAllGridItems(); // 🔥 ESSENCIAL
     }
   });
 
   // Initial render
   updateVisibility();
+
+  function resizeGridItem(item) {
+    const grid = document.querySelector(".grid");
+    const rowHeight = parseInt(
+      window.getComputedStyle(grid).getPropertyValue("grid-auto-rows"),
+    );
+    const rowGap = parseInt(
+      window.getComputedStyle(grid).getPropertyValue("gap"),
+    );
+
+    const img = item.querySelector("img");
+    const height = img.getBoundingClientRect().height;
+
+    const rowSpan = Math.ceil((height + rowGap) / (rowHeight + rowGap));
+
+    item.style.gridRowEnd = "span " + rowSpan;
+  }
+
+  function resizeAllGridItems() {
+    const items = document.querySelectorAll(".item");
+    items.forEach((item) => resizeGridItem(item));
+  }
+
+  // 🔥 quando tudo carregar
+  window.addEventListener("load", resizeAllGridItems);
+
+  // 🔥 quando redimensionar
+  window.addEventListener("resize", resizeAllGridItems);
+
+  // 🔥 quando imagens carregarem
+  document.querySelectorAll(".item img").forEach((img) => {
+    img.addEventListener("load", resizeAllGridItems);
+  });
 </script>
